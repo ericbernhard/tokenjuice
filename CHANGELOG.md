@@ -21,6 +21,8 @@
 
 - Keep the community Grok CLI hook fail-open when its JSON input is null, an array or a primitive.
 
+- Warn when the visible Goose context filename configuration excludes installed `.goosehints`, and document its Developer extension prerequisite.
+
 ### Maintenance
 
 - Pin third-party GitHub Actions to verified commit SHAs so mutable tags cannot replace CI or release code.
