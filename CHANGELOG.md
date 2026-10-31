@@ -6,6 +6,10 @@
 
 - Preserve exact file-read output through pre-tool hook wrapping without appending an extra newline.
 
+### Maintenance
+
+- Audit dependencies weekly and on pull requests, validate Node.js 22/24/26, and patch the development-tool minimatch denial-of-service advisory.
+
 ### Breaking changes
 
 - Require Node.js 22 or newer (`engines.node` is now `>=22`). Node.js 20 reached end of life in April 2026.
