@@ -19,6 +19,8 @@
 - Route Droid Execute commands through pre-tool wrapping so compacted output replaces noisy terminal output; migrate legacy tokenjuice post-tool entries on reinstall.
 - Publish Mux hook updates atomically from checked file snapshots, preserve executable permissions, and reserve backups without overwriting concurrent files.
 
+- Keep the community Grok CLI hook fail-open when its JSON input is null, an array or a primitive.
+
 ### Maintenance
 
 - Pin third-party GitHub Actions to verified commit SHAs so mutable tags cannot replace CI or release code.
