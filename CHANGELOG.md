@@ -17,6 +17,7 @@
 
 - Preserve exact file-read output through pre-tool hook wrapping without appending an extra newline.
 - Route Droid Execute commands through pre-tool wrapping so compacted output replaces noisy terminal output; migrate legacy tokenjuice post-tool entries on reinstall.
+- Publish Mux hook updates atomically from checked file snapshots, preserve executable permissions, and reserve backups without overwriting concurrent files.
 
 ### Maintenance
 
