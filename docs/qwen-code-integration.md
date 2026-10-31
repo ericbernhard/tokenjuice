@@ -32,7 +32,9 @@ The old hook only added context and could not replace the original shell result.
   tokenjuice wrap --raw -- <command>
   ```
 
-- Resolves a POSIX shell from `TOKENJUICE_QWEN_CODE_SHELL`, `SHELL`, `bash`, or `sh`.
+- Uses Bash to match the native tool regardless of the login `SHELL`.
+  `TOKENJUICE_QWEN_CODE_SHELL` provides an explicit interpreter override; choose a
+  Bash-compatible shell.
 - Leaves input unchanged when it cannot resolve a shell or parse the hook payload.
 - Uses the current workspace by default; `QWEN_PROJECT_DIR` overrides the project
   directory for scripted installs and tests.
@@ -46,11 +48,19 @@ node scripts/qwen-e2e.mjs /path/to/qwen
 
 The test runs the real host in a disposable trusted project against a loopback
 OpenAI-compatible model endpoint. It compares baseline and installed sessions,
-checking listing compaction, exact file reads, raw bypass, failure output, and
+checking listing compaction, exact file reads, Bash syntax independent of the login
+shell, raw bypass, failure output, and
 native failure flags and exit status in subsequent model requests. Qwen Code
-trims edge whitespace from shell output; exact reads are compared against its
-baseline result. No model credentials are passed through.
+normalizes CRLF and trims trailing whitespace in PTY output; exact reads are
+compared against its baseline result. Raw results exclude only the native
+process group ID from comparison. No model credentials are passed through.
 
 This verifies host loading and model-visible delivery, not remote provider
 availability or model reasoning quality. The test allows only the shell tool in
 its disposable environment using Qwen Code's native `--allowed-tools` option.
+
+The test explicitly enables Qwen Code's PTY shell mode. The pinned host's default
+headless buffered pipe mode intermittently lost output before tokenjuice was
+installed, including a file listing and a builtin-only Bash command. That mode
+remains unqualified. The Bash case observes array expansion through an external
+Node process.
